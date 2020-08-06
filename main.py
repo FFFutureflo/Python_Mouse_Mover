@@ -5,14 +5,15 @@ import time
 
 class MouseMover:
 
+    # Standard values
     next_step_down_right = True
     x_offset = 100
     y_offset = 100
     sleep_timer = 1
 
     def switch_offset(self):
-        self.x_offset = -1 * self.x_offset
-        self.y_offset = -1 * self.y_offset
+        self.x_offset = -self.x_offset
+        self.y_offset = -self.y_offset
 
     def main(self, argv):
         
@@ -25,7 +26,7 @@ class MouseMover:
             if opt in ("-t", "--sleeptimer"):
                 self.sleep_timer = float(arg)
         while True:
-            # Check for moving the mouse back to the original position
+            # Check if the mouse should be moved down right or top left to get back to the original position
             if not self.next_step_down_right:
                 self.switch_offset()
             pyautogui.move(self.x_offset,self.y_offset)
